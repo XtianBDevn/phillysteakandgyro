@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700" role="img" aria-label="Hero placeholder">
+  <rect width="1120" height="700" fill="#f0e6d2"/>
+  <rect x="80" y="180" width="960" height="340" rx="24" fill="#c8102e" opacity=".15"/>
+  <text x="560" y="360" text-anchor="middle" fill="#8a0a1e" font-family="system-ui,sans-serif" font-size="36" font-weight="700">Cheesesteak photo</text>
+</svg>

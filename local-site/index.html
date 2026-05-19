@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!-- Day-one fix 7: explicit viewport. Wix sets this already, but on the
+     rebuild we make it explicit + lock to device width with safe-area support. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- Day-one fix 1: SEO meta tuned for local intent in Richmond / Carytown -->
+<title>Best Cheesesteaks &amp; Gyros in Carytown, Richmond VA | Philly Steak &amp; Gyros</title>
+<meta name="description" content="Hand-grilled Philly cheesesteaks, gyros, falafel and wings in Carytown, Richmond VA. Open daily — dine in, pickup, or order delivery via DoorDash, Uber Eats, and Grubhub." />
+<link rel="canonical" href="https://www.phillysteakgyros.com/" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="Philly Steak &amp; Gyros — Carytown, Richmond VA" />
+<meta property="og:description" content="Hand-grilled cheesesteaks, gyros, falafel and wings on West Cary Street." />
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:url" content="https://www.phillysteakgyros.com/" />
+<meta property="og:image" content="https://www.phillysteakgyros.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Theme + favicons -->
+<meta name="theme-color" content="#c8102e" />
+
+<link rel="stylesheet" href="css/site.css" />
+
+<!-- Day-one fix 2: LocalBusiness + Menu JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Philly Steak & Gyros",
+  "url": "https://www.phillysteakgyros.com/",
+  "telephone": "+1-804-562-1174",
+  "image": "https://www.phillysteakgyros.com/og-image.jpg",
+  "priceRange": "$$",
+  "servesCuisine": ["American", "Mediterranean", "Greek", "Philly Cheesesteak"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3443 W Cary St",
+    "addressLocality": "Richmond",
+    "addressRegion": "VA",
+    "postalCode": "23221",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.5538,
+    "longitude": -77.4790
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
+      "opens": "11:00", "closes": "22:15" },
+    { "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday","Saturday"],
+      "opens": "11:00", "closes": "23:15" },
+    { "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "11:00", "closes": "19:45" }
+  ],
+  "hasMenu": "https://www.phillysteakgyros.com/menu",
+  "acceptsReservations": false,
+  "potentialAction": {
+    "@type": "OrderAction",
+    "target": [
+      "https://www.doordash.com/store/philly-steak-and-gyros-richmond/",
+      "https://www.ubereats.com/store/philly-steak-and-gyros/",
+      "https://www.grubhub.com/restaurant/philly-steak--gyros-3443-w-cary-st-richmond/"
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Philly Steak and Gyros home">
+      <strong>Philly</strong> Steak &amp; Gyros
+    </a>
+    <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">☰</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="menu.html">Menu</a>
+      <a href="#order">Order Online</a>
+      <a href="#visit">Visit</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Day-one fix 1: real H1 with location intent -->
+  <section class="hero">
+    <div class="container">
+      <h1>Hand-grilled <span class="accent">Cheesesteaks &amp; Gyros</span> in Carytown, Richmond</h1>
+      <p class="lede">On West Cary Street since day one. Pickup, delivery, or come hang out.</p>
+      <div class="actions">
+        <a class="btn" href="#order">Order Online</a>
+        <a class="btn btn--ghost" href="menu.html">See the Menu</a>
+      </div>
+      <!-- Day-one fix 6: descriptive alt text -->
+      <img class="hero-photo"
+           src="assets/hero-cheesesteak.svg"
+           alt="A loaded Philly cheesesteak sub with grilled onions, peppers, and melted provolone on a toasted hoagie roll"
+           width="1120" height="700"
+           loading="eager" fetchpriority="high" />
+    </div>
+  </section>
+
+  <!-- Delivery row -->
+  <section class="delivery" id="order" aria-labelledby="order-h">
+    <div class="container">
+      <h2 id="order-h" class="visually-hidden" style="position:absolute;left:-9999px">Order Online</h2>
+      <div class="row">
+        <a href="https://www.doordash.com/store/philly-steak-and-gyros-richmond/" rel="noopener" target="_blank">DoorDash</a>
+        <a href="https://www.ubereats.com/store/philly-steak-and-gyros/" rel="noopener" target="_blank">Uber Eats</a>
+        <a href="https://www.grubhub.com/restaurant/philly-steak--gyros-3443-w-cary-st-richmond/" rel="noopener" target="_blank">Grubhub</a>
+        <a class="btn" href="tel:+18045621174">Call to Order · (804) 562-1174</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured items -->
+  <section class="featured">
+    <div class="container">
+      <h2>Customer favorites</h2>
+      <p class="section-lede">A few of the most-ordered items in Carytown.</p>
+      <div class="grid">
+        <article class="card">
+          <img src="assets/philly-steak-sub.svg"
+               alt="Philly steak sub with grilled onions, lettuce, tomato, and provolone cheese on a hoagie"
+               width="800" height="600" loading="lazy" />
+          <div class="body">
+            <h3>Philly Steak Sub</h3>
+            <p>Lettuce, tomato, mayo, grilled onions, provolone.</p>
+            <div class="row">
+              <span class="price">From $6.99</span>
+              <a class="btn btn--ghost" href="menu.html#philly-steak-sub">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/gyro-platter.svg"
+               alt="Gyro platter with rice, salad, pita, and tzatziki sauce"
+               width="800" height="600" loading="lazy" />
+          <div class="body">
+            <h3>Gyro Platter</h3>
+            <p>Seasoned lamb &amp; beef over rice with salad, pita, tzatziki.</p>
+            <div class="row">
+              <span class="price">From $11.99</span>
+              <a class="btn btn--ghost" href="menu.html#gyro-platter">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/falafel-bowl.svg"
+               alt="Falafel bowl with hummus, salad, and warm pita bread"
+               width="800" height="600" loading="lazy" />
+          <div class="body">
+            <h3>Falafel &amp; Koshari</h3>
+            <p>Vegetarian classics done the Mediterranean way.</p>
+            <div class="row">
+              <span class="price">From $9.49</span>
+              <a class="btn btn--ghost" href="menu.html#falafel">Order</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Day-one fix 4: Instagram link + embed strip placeholder. Drop the IG
+       handle in once the client confirms it, then swap tiles for live embeds
+       via Instagram Basic Display API or a static-fallback gallery. -->
+  <section class="ig" aria-labelledby="ig-h">
+    <div class="container">
+      <h2 id="ig-h">@phillysteakgyros on Instagram</h2>
+      <p class="section-lede">
+        <a href="https://www.instagram.com/phillysteakgyros/" rel="noopener" target="_blank">
+          Follow us for daily specials &rarr;
+        </a>
+      </p>
+      <div class="grid" role="list">
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-1.svg')" aria-label="Customer holding a Philly steak sub"></div>
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-2.svg')" aria-label="Lamb gyro fresh off the spit"></div>
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-3.svg')" aria-label="Wings tossed in house sauce"></div>
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-4.svg')" aria-label="Falafel platter with hummus"></div>
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-5.svg')" aria-label="Loaded fries with cheese"></div>
+        <div class="tile" role="listitem" style="background-image:url('assets/ig-6.svg')" aria-label="Storefront on West Cary Street"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info strip -->
+  <section class="info-strip" id="visit" aria-labelledby="visit-h">
+    <div class="container">
+      <h2 id="visit-h" style="position:absolute;left:-9999px">Visit</h2>
+      <div class="grid">
+        <div>
+          <h3>Address</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=3443+W+Cary+St,+Richmond,+VA+23221" rel="noopener">
+            3443 W Cary St<br/>Richmond, VA 23221
+          </a>
+        </div>
+        <div>
+          <h3>Hours</h3>
+          <ul class="hours">
+            <li><span class="day">Mon–Thu</span><span class="time">11:00 AM – 10:15 PM</span></li>
+            <li><span class="day">Fri–Sat</span><span class="time">11:00 AM – 11:15 PM</span></li>
+            <li><span class="day">Sunday</span><span class="time">11:00 AM – 7:45 PM</span></li>
+          </ul>
+        </div>
+        <div id="contact">
+          <h3>Call</h3>
+          <a href="tel:+18045621174" style="font-size:1.25rem;font-weight:700;text-decoration:none">
+            (804) 562-1174
+          </a><br/>
+          <a href="mailto:hello@phillysteakgyros.com">hello@phillysteakgyros.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Day-one fix 7: mobile-only sticky CTA trio -->
+<nav class="cta-trio" aria-label="Quick actions">
+  <a href="tel:+18045621174" aria-label="Call Philly Steak and Gyros">
+    <span class="icon" aria-hidden="true">📞</span> Call
+  </a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=3443+W+Cary+St+Richmond+VA+23221" rel="noopener" aria-label="Get directions">
+    <span class="icon" aria-hidden="true">📍</span> Directions
+  </a>
+  <a data-primary href="#order" aria-label="Order online">
+    <span class="icon" aria-hidden="true">🛵</span> Order
+  </a>
+</nav>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div>&copy; <span id="year">2026</span> Philly Steak &amp; Gyros · 3443 W Cary St, Richmond VA</div>
+      <div>
+        <a href="https://www.instagram.com/phillysteakgyros/" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "philly-steak-and-gyro",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local WordPress dev environment for Philly Steak & Gyro",
+  "scripts": {
+    "start": "wp-env start",
+    "stop": "wp-env stop",
+    "destroy": "wp-env destroy",
+    "logs": "wp-env logs",
+    "cli": "wp-env run cli wp",
+    "clean": "wp-env clean all",
+    "local-site": "python3 -m http.server 3333 --directory local-site"
+  },
+  "devDependencies": {
+    "@wordpress/env": "^10.0.0"
+  }
+}

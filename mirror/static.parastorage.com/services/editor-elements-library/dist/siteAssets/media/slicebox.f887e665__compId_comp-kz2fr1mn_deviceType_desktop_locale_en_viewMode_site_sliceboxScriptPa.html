@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1">
+    <style type="text/css">
+      .sb-slider {
+        margin: 10px auto;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sb-slider li {
+        margin: 0;
+        padding: 0;
+        display: none;
+        height: 100%;
+      }
+
+      .sb-slider li > a {
+        outline: none;
+      }
+
+      .sb-slider li > a img {
+        border: none;
+
+      }
+
+      .sb-slider img {
+        display: block;
+      }
+
+      .sb-description {
+        padding: 20px;
+        bottom: 25px;
+        left: 0;
+        border:0;
+        width:60%;
+        z-index: 1000;
+        position: absolute;
+        background: rgb(250,250,250);
+        background: rgba(250,250,250, 0.7);
+        color: #ffffff;
+
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        opacity: 0;
+
+        -webkit-transition: all 200ms;
+        -moz-transition: all 200ms;
+        -o-transition: all 200ms;
+        -ms-transition: all 200ms;
+        transition: all 200ms;
+      }
+
+      .sb-perspective {
+        position: relative;
+      }
+
+      .sb-perspective > div {
+        position: absolute;
+
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -o-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+
+        -webkit-backface-visibility : hidden;
+        -moz-backface-visibility : hidden;
+        -o-backface-visibility : hidden;
+        -ms-backface-visibility : hidden;
+        backface-visibility : hidden;
+      }
+
+      .sb-side {
+        margin: 0;
+        display: block;
+        position: absolute;
+
+        -moz-backface-visibility : hidden;
+
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -o-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
+
+
+      *,*:after,*:before { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+      body,html {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: moz-none;
+          -ms-user-select: none;
+          user-select: none;
+          margin:0;
+          height: 100%;
+          width: 100%;
+          padding:25px 25px 40px 25px;
+          font-family: Helvetica, Arial, sans-serif;
+      }
+
+
+      .wrapper {
+          position: relative;
+          height:100%;
+      }
+
+      .shadow {
+          width: 100%;
+          height: 168px;
+
+          position: absolute;
+          margin-top: -128px;
+          background: transparent var(--shadowImageUrl) no-repeat bottom center;
+          background-size: 100% 100%;
+          z-index: -1;
+          display: none;
+          opacity: 0.4;
+      }
+
+
+
+      .sb-slider li{
+          background: #222;
+      }
+
+      .hide{
+          display:none !important;
+      }
+
+
+      .nav-arrows a{
+          z-index:10000;
+      }
+
+
+
+      .sb-description h3 {
+          font-size: 22px;
+          font-weight: normal;
+          color: #0f0f0f;
+          letter-spacing: 1px;
+          margin: 0;
+          padding: 0;
+          word-wrap: break-word;
+      }
+
+      .sb-description pre {
+          font-family: "Arial";
+          font-size: 15px;
+          font-weight: normal;
+          color: #0f0f0f;
+          margin: 8px 0 0 1px;
+          padding: 0;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+      }
+
+      .nav-arrows {
+          display: none;
+      }
+
+
+      .nav-arrows a {
+          width: 42px;
+          height: 42px;
+          background: rgba(0, 0, 0, 0.6) var(--leftArrowImageUrl) no-repeat 16px 14px;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          text-indent: -9000px;
+          cursor: pointer;
+          margin-top: -21px;
+          opacity: 0.75;
+
+          -webkit-transition:opacity 0.2s;
+          -moz-transition:opacity 0.2s;
+          -ms-transition:opacity 0.2s;
+          -o-transition:opacity 0.2s;
+          transition:opacity 0.2s;
+
+
+      }
+
+      .nav-arrows a:first-child{
+          left: auto;
+          background: rgba(0, 0, 0, 0.6) var(--rightArrowImageUrl) no-repeat 18px 14px;
+          right: 0;
+      }
+
+      .nav-arrows a:hover {
+          opacity: 1;
+      }
+
+
+      .showOpac{
+          -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+          filter: alpha(opacity=100);
+          opacity: 1;
+      }
+
+      .nav-dots {
+          text-align: center;
+          position: absolute;
+          bottom: -5px;
+          height: 30px;
+          width: 100%;
+          left: 0;
+          display: none;
+      }
+
+      .nav-dots span {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          margin: 3px;
+          background: #cbbfae;
+          cursor: pointer;
+          box-shadow:
+          0 1px 1px rgba(255,255,255,0.6),
+          inset 0 1px 1px rgba(0,0,0,0.1);
+      }
+
+      .nav-dots span.nav-dot-current {
+          box-shadow:
+          0 1px 1px rgba(255,255,255,0.6),
+          inset 0 1px 1px rgba(0,0,0,0.1),
+          inset 0 0 0 3px #cbbfae,
+          inset 0 0 0 8px #fff;
+      }
+
+      .nav-options {
+          width: 70px;
+          height: 30px;
+          position: absolute;
+          right: 70px;
+          bottom: 0px;
+          display: none;
+      }
+
+      .nav-options span {
+          width: 30px;
+          height: 30px;
+          /* background: #cbbfae url(../images/options.png) no-repeat top left; */
+          text-indent: -9000px;
+          cursor: pointer;
+          opacity: 0.7;
+          display: inline-block;
+          border-radius: 50%;
+      }
+
+      .nav-options span:first-child{
+          background-position: -30px 0px;
+          margin-right: 3px;
+      }
+
+      .nav-options span:hover {
+          opacity: 1;
+      }
+
+      @media all and (max-width: 500px) and (min-width: 0px){
+
+          .sb-description{
+              left: 50%;
+              margin: 0 -30% 0;
+          }
+
+          .shadow {
+              margin-top: -135px;
+          }
+
+      }
+
+      @media all and (max-width: 330px) and (min-width: 0px){
+
+
+          .sb-description h3{
+              text-align: center;
+          }
+
+          .sb-description pre{
+              display:none;
+          }
+
+          .shadow {
+              margin-top: -145px;
+          }
+
+      }
+
+
+      #loading{
+          display: block;
+          position: relative;
+          top: 50%;
+          margin: -38px 0 0 -32px;
+          left: 50%;
+      }
+      #floatingBarsG{
+          position:relative;
+          width:62px;
+          height:77px}
+
+      .blockG{
+          position:absolute;
+          background-color:#FFFFFF;
+          width:10px;
+          height:24px;
+          -moz-border-radius:8px 8px 0 0;
+          -moz-transform:scale(0.4);
+          -moz-animation-name:fadeG;
+          -moz-animation-duration:1.04s;
+          -moz-animation-iteration-count:infinite;
+          -moz-animation-direction:linear;
+          -webkit-border-radius:8px 8px 0 0;
+          -webkit-transform:scale(0.4);
+          -webkit-animation-name:fadeG;
+          -webkit-animation-duration:1.04s;
+          -webkit-animation-iteration-count:infinite;
+          -webkit-animation-direction:linear;
+          -ms-border-radius:8px 8px 0 0;
+          -ms-transform:scale(0.4);
+          -ms-animation-name:fadeG;
+          -ms-animation-duration:1.04s;
+          -ms-animation-iteration-count:infinite;
+          -ms-animation-direction:linear;
+          -o-border-radius:8px 8px 0 0;
+          -o-transform:scale(0.4);
+          -o-animation-name:fadeG;
+          -o-animation-duration:1.04s;
+          -o-animation-iteration-count:infinite;
+          -o-animation-direction:linear;
+          border-radius:8px 8px 0 0;
+          transform:scale(0.4);
+          animation-name:fadeG;
+          animation-duration:1.04s;
+          animation-iteration-count:infinite;
+          animation-direction:linear;
+      }
+
+      #rotateG_01{
+          left:0;
+          top:28px;
+          -moz-animation-delay:0.39s;
+          -moz-transform:rotate(-90deg);
+          -webkit-animation-delay:0.39s;
+          -webkit-transform:rotate(-90deg);
+          -ms-animation-delay:0.39s;
+          -ms-transform:rotate(-90deg);
+          -o-animation-delay:0.39s;
+          -o-transform:rotate(-90deg);
+          animation-delay:0.39s;
+          transform:rotate(-90deg);
+      }
+
+      #rotateG_02{
+          left:8px;
+          top:10px;
+          -moz-animation-delay:0.52s;
+          -moz-transform:rotate(-45deg);
+          -webkit-animation-delay:0.52s;
+          -webkit-transform:rotate(-45deg);
+          -ms-animation-delay:0.52s;
+          -ms-transform:rotate(-45deg);
+          -o-animation-delay:0.52s;
+          -o-transform:rotate(-45deg);
+          animation-delay:0.52s;
+          transform:rotate(-45deg);
+      }
+
+      #rotateG_03{
+          left:26px;
+          top:3px;
+          -moz-animation-delay:0.65s;
+          -moz-transform:rotate(0deg);
+          -webkit-animation-delay:0.65s;
+          -webkit-transform:rotate(0deg);
+          -ms-animation-delay:0.65s;
+          -ms-transform:rotate(0deg);
+          -o-animation-delay:0.65s;
+          -o-transform:rotate(0deg);
+          animation-delay:0.65s;
+          transform:rotate(0deg);
+      }
+
+      #rotateG_04{
+          right:8px;
+          top:10px;
+          -moz-animation-delay:0.78s;
+          -moz-transform:rotate(45deg);
+          -webkit-animation-delay:0.78s;
+          -webkit-transform:rotate(45deg);
+          -ms-animation-delay:0.78s;
+          -ms-transform:rotate(45deg);
+          -o-animation-delay:0.78s;
+          -o-transform:rotate(45deg);
+          animation-delay:0.78s;
+          transform:rotate(45deg);
+      }
+
+      #rotateG_05{
+          right:0;
+          top:28px;
+          -moz-animation-delay:0.9099999999999999s;
+          -moz-transform:rotate(90deg);
+          -webkit-animation-delay:0.9099999999999999s;
+          -webkit-transform:rotate(90deg);
+          -ms-animation-delay:0.9099999999999999s;
+          -ms-transform:rotate(90deg);
+          -o-animation-delay:0.9099999999999999s;
+          -o-transform:rotate(90deg);
+          animation-delay:0.9099999999999999s;
+          transform:rotate(90deg);
+      }
+
+      #rotateG_06{
+          right:8px;
+          bottom:7px;
+          -moz-animation-delay:1.04s;
+          -moz-transform:rotate(135deg);
+          -webkit-animation-delay:1.04s;
+          -webkit-transform:rotate(135deg);
+          -ms-animation-delay:1.04s;
+          -ms-transform:rotate(135deg);
+          -o-animation-delay:1.04s;
+          -o-transform:rotate(135deg);
+          animation-delay:1.04s;
+          transform:rotate(135deg);
+      }
+
+      #rotateG_07{
+          bottom:0;
+          left:26px;
+          -moz-animation-delay:1.1700000000000002s;
+          -moz-transform:rotate(180deg);
+          -webkit-animation-delay:1.1700000000000002s;
+          -webkit-transform:rotate(180deg);
+          -ms-animation-delay:1.1700000000000002s;
+          -ms-transform:rotate(180deg);
+          -o-animation-delay:1.1700000000000002s;
+          -o-transform:rotate(180deg);
+          animation-delay:1.1700000000000002s;
+          transform:rotate(180deg);
+      }
+
+      #rotateG_08{
+          left:8px;
+          bottom:7px;
+          -moz-animation-delay:1.3s;
+          -moz-transform:rotate(-135deg);
+          -webkit-animation-delay:1.3s;
+          -webkit-transform:rotate(-135deg);
+          -ms-animation-delay:1.3s;
+          -ms-transform:rotate(-135deg);
+          -o-animation-delay:1.3s;
+          -o-transform:rotate(-135deg);
+          animation-delay:1.3s;
+          transform:rotate(-135deg);
+      }
+
+      @-moz-keyframes fadeG{
+          0%{
+              background-color:#000000}
+
+          100%{
+              background-color:#FFFFFF}
+
+      }
+
+      @-webkit-keyframes fadeG{
+          0%{
+              background-color:#000000}
+
+          100%{
+              background-color:#FFFFFF}
+
+      }
+
+      @-ms-keyframes fadeG{
+          0%{
+              background-color:#000000}
+
+          100%{
+              background-color:#FFFFFF}
+
+      }
+
+      @-o-keyframes fadeG{
+          0%{
+              background-color:#000000}
+
+          100%{
+              background-color:#FFFFFF}
+
+      }
+
+      @keyframes fadeG{
+          0%{
+              background-color:#000000}
+
+          100%{
+              background-color:#FFFFFF}
+
+      }
+    </style>
+    <script type="text/javascript">
+      const params = new URLSearchParams(window.location.search);
+      const getPath = (decodedPath) => {
+        try {
+          return new URL(decodedPath).pathname;
+        } catch (e) {
+          return decodedPath;
+        }
+      }
+
+      const decodedModernizrScriptPath = decodeURIComponent(
+          params.get('modernizrScriptPath'),
+        );
+
+      const modernizrScriptPath = getPath(decodedModernizrScriptPath);
+      const modernizrScriptUrl = `${modernizrScriptPath}?origin=${decodeURIComponent(params.get('origin'))}`;
+
+      const modernizrScriptElement = document.createElement('script');
+      modernizrScriptElement.src = modernizrScriptUrl;
+      document.head.appendChild(modernizrScriptElement);
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul id="sb-slider" class="sb-slider"></ul>
+    <div id="shadow" class="shadow"></div>
+    <div id="nav-arrows" class="nav-arrows">
+        <a id="right-arrow" href="#">Next</a>
+        <a id="left-arrow" href="#">Previous</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="//static.parastorage.com/services/santa/1.13152.0/node_modules/@wix/santa-galleries/lib/js/wix.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="//static.parastorage.com/services/third-party/hammer/1.0.5/jquery.hammer.min.js"></script>
+<script type="text/javascript">
+  const decodedSliceboxScriptPath = decodeURIComponent(
+    params.get('sliceboxScriptPath'),
+  );
+
+  const sliceboxScriptPath = getPath(decodedSliceboxScriptPath);
+  const sliceboxScriptUrl = `${sliceboxScriptPath}?origin=${decodeURIComponent(params.get('origin'))}`;
+
+  const sliceboxScriptElement = document.createElement('script');
+  sliceboxScriptElement.src = sliceboxScriptUrl;
+  sliceboxScriptElement.defer = true;
+
+  document.body.appendChild(sliceboxScriptElement);
+</script>
+<script type="text/javascript">
+  const decodedShadowImagePath = decodeURIComponent(
+    params.get('shadowImagePath'),
+  );
+  const decodedLeftArrowImagePath = decodeURIComponent(
+    params.get('leftArrowImagePath'),
+  );
+  const decodedRightArrowImagePath = decodeURIComponent(
+    params.get('rightArrowImagePath'),
+  );
+
+  const shadowImagePath = getPath(decodedShadowImagePath);
+  const leftArrowImagePath = getPath(decodedLeftArrowImagePath);
+  const rightArrowImagePath = getPath(decodedRightArrowImagePath);
+
+  const shadowImageUrl = `--shadowImageUrl: url(${shadowImagePath})`;
+  const leftArrowImageUrl = `--leftArrowImageUrl: url(${leftArrowImagePath})`;
+  const rightArrowImageUrl = `--rightArrowImageUrl: url(${rightArrowImagePath})`;
+
+  const shadowElement = document.getElementById('shadow');
+  const leftArrowElement = document.getElementById('left-arrow');
+  const rightArrowElement = document.getElementById('right-arrow');
+
+  shadowElement.style = shadowImageUrl;
+  leftArrowElement.style = leftArrowImageUrl;
+  rightArrowElement.style = rightArrowImageUrl;
+</script>
+<script type="text/javascript">
+  window.addEventListener('load', function() {
+    const $el = $('#sb-slider');
+    let props = {};
+    let items = [];
+    let currentMode = {};
+    let mainPageId = 'mainPage';
+    let resizeUpdateImagesTimeout;
+    let autoplayTimeout;
+    const pyramid = (function simplePyramid(){
+        const delta = 150;
+        let lastW = $(window).innerWidth();
+        let lastH = $(window).innerHeight();
+
+
+        return {
+            isOverThresholdChange: function (){
+                const w = $(window).innerWidth();
+                const h = $(window).innerHeight();
+                let update = false;
+                if(w > (lastW + delta) || w < (lastW - delta) ){
+                    update = true;
+                }
+                if(h > (lastH + delta) || h < (lastH - delta) ){
+                    update = true;
+                }
+                if(update){
+                    lastW = w;
+                    lastH = h;
+                }
+                return update;
+            }
+        };
+    }());
+
+    Wix.addEventListener(Wix.Events.EDIT_MODE_CHANGE, function(mode) {
+        currentMode = mode;
+        updateAutoPlay();
+    });
+
+    Wix.addEventListener(Wix.Events.PAGE_NAVIGATION_CHANGE, function() {
+        updateAutoPlay();
+    });
+
+    Wix.addEventListener(Wix.Events.SETTINGS_UPDATED, function(message) {
+        switch(message.cmd) {
+            case 'zoomClosed':
+                hideControls();
+                updateAutoPlay();
+                break;
+            case 'next':
+                next();
+                break;
+            case 'previous':
+                previous();
+                break;
+            default:
+                if ($el.slicebox) {
+                  props = message.props || {};
+                  items = message.items || [];
+                  refreshSlider();
+                }
+                break;
+        }
+        mainPageId = message.mainPageId || mainPageId;
+    });
+
+    Wix.pushState(JSON.stringify({cmd:'componentReady', id: Wix.Utils.getCompId()}));
+
+    function getDelayInMS(){
+        let ms = ((+props.autoplayInterval) * 1000);
+        ms = ms < 5 ? 5 : ms;
+        return ms;
+    }
+
+    function updateAutoPlay(){
+        const vm = Wix.Utils.getViewMode();
+        if(vm === 'preview' || vm === 'site'){
+            autoplayTimeout = setTimeout(startAutoPlay, getDelayInMS());
+        } else{
+            stopAutoPlay()
+        }
+    }
+
+    function startAutoPlay(){
+        clearTimeout(autoplayTimeout);
+        if(props.autoplay){
+            const plugin = getPlugin();
+            plugin && plugin.play();
+        }
+    }
+
+    function stopAutoPlay(){
+        clearTimeout(autoplayTimeout);
+        const plugin = getPlugin();
+        plugin && plugin._stopSlideshow();
+    }
+
+    function next() {
+        const plugin = getPlugin();
+        plugin && plugin.next();
+    }
+
+    function previous() {
+        const plugin = getPlugin();
+        plugin && plugin.previous();
+    }
+
+    function destroySlider(cb){
+        const plugin = getPlugin();
+        plugin && plugin.destroy(cb);
+    }
+
+    function getPlugin(){
+        return $el.data('slicebox');
+    }
+
+    function isMobileView() {
+        return Wix.Utils.getDeviceType() === "mobile";
+    }
+
+    function createSliderDom(){
+        if (isMobileView()) {
+            $('.sb-description').css('display', 'none');
+
+            $('body').css('padding',0);
+            $('#sb-slider').css('padding',0);
+            $('#sb-slider').css('marging',0);
+        }
+        let item;
+        const fragment = document.createDocumentFragment();
+        for(let i=0;i<items.length;i++){
+            item = items[i];
+            fragment.appendChild(createSingleItem(item, i))
+        }
+        return fragment;
+    }
+
+    function getPerfectImageSize(viewPortWidth, viewPortHeight, imageWidth, imageHeight){
+        const delta = 60;
+
+        const w = viewPortWidth;
+        const h = viewPortHeight;
+
+        const viewPortRatio = w/h;
+
+        let iw = imageWidth;
+        let ih = imageHeight;
+
+        if(iw < w && ih < h){
+            if(iw/w < ih/h){
+                ih = iw / viewPortRatio;
+            } else {
+                iw = ih * viewPortRatio;
+            }
+        } else if(iw < w){
+            ih = iw / viewPortRatio;
+        } else if(ih < h){
+            iw = ih * viewPortRatio;
+        } else {
+            iw = w;
+            ih = h;
+        }
+
+        if(Wix.Utils.getViewMode() === 'site' || isMobileView()){
+            return {
+                width: iw <<0,
+                height:ih <<0
+            };
+        } else {
+            return {
+                width: (iw - (iw % delta)) << 0,
+                height:(ih - (ih % delta)) << 0
+            };
+        }
+    }
+
+    function createSingleItem(item, index) {
+        const li = document.createElement('li');
+        let img = document.createElement('img');
+        const div = document.createElement('div');
+        const h3 = document.createElement('h3');
+        const p = document.createElement('pre');
+
+        if (props.galleryImageOnClickAction !== 'goToLink') {
+            li.onclick = function (evt){
+                switch (props.galleryImageOnClickAction) {
+                    case 'zoomMode':
+                        Wix.pushState(JSON.stringify({cmd:'zoom', args:[index]}));
+                        stopAutoPlay();
+                        break;
+                    default:
+                        Wix.pushState(JSON.stringify({cmd: 'itemClicked', args: [index]}));
+                }
+                return false;
+            };
+        }
+        if (props.galleryImageOnClickAction === 'zoomMode') {
+            li.style.cursor = 'pointer';
+        }
+        const width = $('.wrapper').width();
+        const height = $('.wrapper').height();
+
+        const imgSize = getPerfectImageSize(width, height, item.width, item.height);
+
+        if (imgSize.width > 0 && imgSize.height > 0) {
+            img.src = Wix.Utils.Media.getResizedImageUrl(item.uri, imgSize.width, imgSize.height);
+        } else {
+            img.src = Wix.Utils.Media.getResizedImageUrl('0da768_c9952152b7cf41d0b7d84754fd81da12~mv2.png', 4, 4);
+        }
+
+        img.setAttribute('data-uri', item.uri);
+
+
+        $(h3).text(item.title);
+        $(p).text(item.description);
+
+        div.className = 'sb-description';
+        if (isMobileView()) {
+            div.className += ' hide';
+        } else if(!(item.title || item.description)){
+            div.className += ' hide';
+        }
+
+        if(item.linkType !== "FREE_LINK" && props.galleryImageOnClickAction === 'goToLink'){
+            let uri;
+            let pageId;
+            const a = document.createElement('a');
+            if (item.linkType === 'DOCUMENT') {
+                uri = item.href;
+            }
+            if(item.linkType === 'PAGE'){
+                uri = '#';
+                a.onclick = function(){
+                    stopAutoPlay();
+                    pageId = item && item.link && item.link.pageId && item.link.pageId.id || mainPageId;
+                    Wix.navigateToPage(pageId);
+                    return false;
+                }
+            }
+            if(item.linkType === 'ANCHOR'){
+                a.onclick = function(e) {
+                    pageId = item && item.link && item.link.pageId && item.link.pageId.id || mainPageId;
+                    stopAutoPlay();
+                    Wix.pushState(JSON.stringify({cmd: 'navigateToAnchor', args: [pageId, item["data-anchor"]]}));
+                    e.preventDefault();
+                }
+            }
+            if (uri){
+                a.href = uri;
+            }else if (item.href){
+                a.href = item.href;
+            }
+            if (item.title) {
+                a.alt = item.title;
+            }
+            if (item.target) {
+                a.target = item.target === '_self' ? '_parent' : item.target;
+            }
+            a.appendChild(img);
+            img = a;
+        }
+
+        if(item.title){
+            div.appendChild(h3);
+        }
+        if(item.description){
+            div.appendChild(p);
+        }
+
+        li.appendChild(img);
+        li.appendChild(div);
+        return li;
+    }
+
+    $('.wrapper').hover(function(e){
+        if($(e.target).is('#shadow')){return}
+
+        if(e.type === 'mouseenter'){
+            if(props.autoplay){
+                $('#nav-arrows').stop().show(200);
+            }
+            $('.sb-current .sb-description').addClass('showOpac');
+        } else {
+            hideControls();
+        }
+    });
+
+    function hideControls(){
+        if(props.autoplay){
+            $('#nav-arrows').stop().hide(200);
+        }
+        $('.sb-current .sb-description').removeClass('showOpac');
+    }
+
+    function reCreatePluginDom(){
+        const sliderDom = createSliderDom();
+        $el.empty().append(sliderDom);
+    }
+
+    function removeLoadingScreen(){
+        $('body').find('#loading').remove();
+    }
+    function appendLoadingScreen(){
+        $('body').find('#loading').remove().end().prepend('<div id="loading"><div id="floatingBarsG"><div class="blockG" id="rotateG_01"></div><div class="blockG" id="rotateG_02"></div><div class="blockG" id="rotateG_03"></div><div class="blockG" id="rotateG_04"></div><div class="blockG" id="rotateG_05"></div><div class="blockG" id="rotateG_06"></div><div class="blockG" id="rotateG_07"></div><div class="blockG" id="rotateG_08"></div></div></div>')
+    }
+
+    function refreshSlider(){
+        destroySlider();
+        appendLoadingScreen();
+        reCreatePluginDom();
+        startSlider();
+    }
+
+    function startSlider(){
+
+        const $navArrows = $('#nav-arrows').hide();
+        const $shadow = $('#shadow').hide();
+        const ms = getDelayInMS();
+
+        const slicebox = $el.slicebox({
+            onReady : function () {
+                if(!props.autoplay){
+                    $navArrows.show();
+                }
+
+                if (!isMobileView()) {
+                    $shadow.show();
+                }
+
+                $navArrows.children(':first').off().on('click', function () {
+                    slicebox.next();
+                    props.autoplay && startAutoPlay();
+                    return false;
+                });
+
+                $navArrows.children(':last').off().on('click', function () {
+                    slicebox.previous();
+                    props.autoplay && startAutoPlay();
+                    return false;
+                });
+
+                Hammer($el).on("swipeleft", function() {
+                    slicebox.previous();
+                    props.autoplay && startAutoPlay();
+                    return false;
+                });
+
+                Hammer($el).on("swiperight", function() {
+                    slicebox.next();
+                    props.autoplay && startAutoPlay();
+                    return false;
+                });
+
+                removeLoadingScreen();
+                updateAutoPlay();
+            },
+            onAfterChange: function(itemIndex) {
+                Wix.pushState(JSON.stringify({cmd:'itemChanged', args:[itemIndex]}));
+            },
+            onresize:function(){
+                clearTimeout(resizeUpdateImagesTimeout);
+                resizeUpdateImagesTimeout = setTimeout(function(){
+                    if(pyramid.isOverThresholdChange()){
+                        refreshSlider();
+                    }
+                }, 2000)
+            },
+            perspective : 1200,
+            orientation : 'r',
+            cuboidsRandom : true,
+            disperseFactor : isMobileView() ? 8 : 25,
+            interval:  ms >= 0 ? (ms+1000) : 5000,
+            autoplay: props.autoplay || false
+        });
+    }
+  });
+</script>
+</body>
+</html>
