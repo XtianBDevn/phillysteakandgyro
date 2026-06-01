@@ -2,6 +2,12 @@
 
 Drop-in snippet for **Wix Settings → Custom Code → Body End → All pages → Mobile only**.
 
+For JavaScript-only hotfix code, copy `wix/custom-code-body-end.js`.
+If the Wix admin Custom Code area requires tags, wrap that JavaScript in
+`<script>...</script>` or use the ready-to-paste HTML wrapper in
+`wix/custom-code-body-end.html`. If using Wix Velo, copy `wix/masterPage.js`
+into the site's site-wide `masterPage.js` file.
+
 Fixes:
 
 - iOS Safari `100vh` URL-bar overlap on hero sections

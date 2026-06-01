@@ -27,6 +27,18 @@ local-site/
 
 Serve with `python3 -m http.server 4321 --directory local-site` and open `http://127.0.0.1:4321/`.
 
+## Wix platform files
+
+Copy-ready Wix code lives at `../wix/`:
+
+```
+wix/
+├── custom-code-body-end.js    ← JavaScript-only Wix admin hotfix
+├── custom-code-body-end.html  ← Wix admin Custom Code wrapper
+├── masterPage.js              ← site-wide CSS/mobile CTA hotfix for Wix Velo
+└── README.md                  ← install steps and fallback notes
+```
+
 ## Open questions for the client
 
 1. Confirm Instagram handle (placeholder `@phillysteakgyros`).
