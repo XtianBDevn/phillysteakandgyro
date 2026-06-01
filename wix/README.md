@@ -1,10 +1,25 @@
-# Wix Velo Files
+# Wix Platform Files
 
 This folder contains code intended to be copied into the Wix platform.
 
+## `custom-code-body-end.html`
+
+Use `custom-code-body-end.html` for the Wix admin area.
+
+Install steps:
+
+1. Open the Wix dashboard.
+2. Go to **Settings -> Custom Code -> Add Custom Code**.
+3. Paste the full contents of `wix/custom-code-body-end.html`.
+4. Set **Add Code to Pages** to **All pages**.
+5. Set **Place Code in** to **Body - end**.
+6. Enable **Load code on each new page** if Wix shows that option.
+7. Choose **Mobile only** if Wix shows a device option; otherwise leave it on all devices.
+8. Preview desktop and mobile, then Publish.
+
 ## `masterPage.js`
 
-Use `masterPage.js` for the current Wix live site when you want a site-wide runtime hotfix instead of deploying the static `local-site/` files.
+Use `masterPage.js` for Wix Velo if you are editing the site-wide Velo `masterPage.js` file instead of the admin Custom Code area.
 
 Install steps:
 
@@ -15,12 +30,12 @@ Install steps:
 5. Preview desktop and mobile.
 6. Publish after confirming the CTA and mobile CSS fixes behave correctly.
 
-What it does:
+What both hotfixes do:
 
-- Injects scoped CSS for the mobile viewport, tap targets, horizontal-scroll prevention, and iOS safe-area padding.
-- Adds a mobile sticky **Call / Directions / Order** CTA.
-- Keeps selectors scoped to stable tags/attributes and the custom `#psg-cta-bar` ID.
+- Inject scoped CSS for the mobile viewport, tap targets, horizontal-scroll prevention, and iOS safe-area padding.
+- Add a mobile sticky **Call / Directions / Order** CTA.
+- Keep selectors scoped to stable tags/attributes and the custom `#psg-cta-bar` ID.
 
 Important limitation:
 
-Some Wix/Velo environments restrict direct `document` access in frontend page code. If the browser console logs the warning from `masterPage.js`, install the same CSS/HTML through **Wix Settings -> Custom Code -> Body End -> All pages -> Mobile only** using `docs/03-wix-mobile-hotfix.md`.
+Some Wix/Velo environments restrict direct `document` access in frontend page code. If the browser console logs the warning from `masterPage.js`, use the admin Custom Code snippet in `wix/custom-code-body-end.html` instead.

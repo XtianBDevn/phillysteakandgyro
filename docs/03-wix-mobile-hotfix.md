@@ -2,9 +2,11 @@
 
 Drop-in snippet for **Wix Settings → Custom Code → Body End → All pages → Mobile only**.
 
-If using Wix Velo instead of Custom Code, copy `wix/masterPage.js` into the site's
-site-wide `masterPage.js` file. The Custom Code snippet below is still the
-fallback if the Velo runtime blocks direct DOM access.
+For the Wix admin area, copy the full HTML snippet from
+`wix/custom-code-body-end.html`. That file is the source of truth for the
+admin-ready version because Wix Custom Code expects `<style>` and `<script>` tags,
+not plain Velo JavaScript. If using Wix Velo instead of Custom Code, copy
+`wix/masterPage.js` into the site's site-wide `masterPage.js` file.
 
 Fixes:
 

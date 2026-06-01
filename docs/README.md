@@ -29,12 +29,13 @@ Serve with `python3 -m http.server 4321 --directory local-site` and open `http:/
 
 ## Wix platform files
 
-Copy-ready Wix/Velo code lives at `../wix/`:
+Copy-ready Wix code lives at `../wix/`:
 
 ```
 wix/
-├── masterPage.js   ← site-wide CSS/mobile CTA hotfix for Wix Velo
-└── README.md       ← install steps and fallback notes
+├── custom-code-body-end.html  ← Wix admin Custom Code snippet
+├── masterPage.js              ← site-wide CSS/mobile CTA hotfix for Wix Velo
+└── README.md                  ← install steps and fallback notes
 ```
 
 ## Open questions for the client

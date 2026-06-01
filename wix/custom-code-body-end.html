@@ -1,0 +1,195 @@
+<!--
+  Philly Steak & Gyros - Wix admin Custom Code hotfix
+
+  Paste this in:
+  Wix Dashboard -> Settings -> Custom Code -> Add Custom Code
+
+  Recommended settings:
+  - Add Code to Pages: All pages
+  - Place Code in: Body - end
+  - Load code on each new page
+
+  If Wix offers a device setting, choose Mobile only. The CSS also hides the CTA
+  on tablet/desktop, so it is safe to run on all devices if needed.
+-->
+
+<style id="psg-wix-mobile-hotfix-style">
+  :root {
+    --psg-brand: #c8102e;
+    --psg-ink: #1a1a1a;
+    --psg-line: #e8e2d6;
+    --psg-safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @supports (height: 100dvh) {
+    .full-height-strip,
+    [data-mesh-id$="hero"],
+    .hero-section,
+    section[id*="hero" i] {
+      min-height: 100dvh !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    html,
+    body {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    img,
+    video,
+    iframe {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    a,
+    button,
+    [role="button"] {
+      min-height: 44px;
+    }
+  }
+
+  @media (min-width: 414px) and (max-width: 480px) {
+    [data-mesh-id$="contentWrapper"] {
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+    }
+  }
+
+  #psg-cta-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: #fff;
+    border-top: 1px solid var(--psg-line);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+    padding-bottom: var(--psg-safe-bottom);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  #psg-cta-bar a {
+    min-height: 56px;
+    padding: 12px 4px;
+    border-left: 1px solid var(--psg-line);
+    color: var(--psg-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  #psg-cta-bar a:first-child {
+    border-left: 0;
+  }
+
+  #psg-cta-bar a[data-primary] {
+    background: var(--psg-brand);
+    color: #fff;
+  }
+
+  #psg-cta-bar a:focus,
+  #psg-cta-bar a:hover {
+    text-decoration: underline;
+  }
+
+  body {
+    padding-bottom: calc(60px + var(--psg-safe-bottom)) !important;
+  }
+
+  @media (min-width: 769px) {
+    #psg-cta-bar {
+      display: none;
+    }
+
+    body {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var CTA_ID = "psg-cta-bar";
+    var PHONE_NUMBER = "+18045621174";
+    var DISPLAY_PHONE = "(804) 562-1174";
+    var ADDRESS = "3443 W Cary St Richmond VA 23221";
+    var DIRECTIONS_URL =
+      "https://www.google.com/maps/dir/?api=1&destination=3443+W+Cary+St+Richmond+VA+23221";
+
+    function ready(callback) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", callback);
+      } else {
+        callback();
+      }
+    }
+
+    function prefersReducedMotion() {
+      return (
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    }
+
+    function scrollToOrdering(event) {
+      var orderTarget = document.querySelector(
+        '[href*="doordash"], [href*="ubereats"], [href*="grubhub"], #order'
+      );
+
+      if (!orderTarget) {
+        return;
+      }
+
+      event.preventDefault();
+      orderTarget.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "center",
+      });
+    }
+
+    function installCta() {
+      if (document.getElementById(CTA_ID)) {
+        return;
+      }
+
+      var cta = document.createElement("nav");
+      cta.id = CTA_ID;
+      cta.setAttribute("aria-label", "Quick actions");
+      cta.innerHTML =
+        '<a href="tel:' +
+        PHONE_NUMBER +
+        '" aria-label="Call Philly Steak and Gyros at ' +
+        DISPLAY_PHONE +
+        '">Call</a>' +
+        '<a href="' +
+        DIRECTIONS_URL +
+        '" aria-label="Get directions to ' +
+        ADDRESS +
+        '" rel="noopener">Directions</a>' +
+        '<a data-primary href="#order" aria-label="Order online">Order</a>';
+
+      cta.querySelector("[data-primary]").addEventListener("click", scrollToOrdering);
+      document.body.appendChild(cta);
+    }
+
+    ready(installCta);
+  })();
+</script>
