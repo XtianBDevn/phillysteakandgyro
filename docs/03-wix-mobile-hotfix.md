@@ -2,6 +2,10 @@
 
 Drop-in snippet for **Wix Settings → Custom Code → Body End → All pages → Mobile only**.
 
+If using Wix Velo instead of Custom Code, copy `wix/masterPage.js` into the site's
+site-wide `masterPage.js` file. The Custom Code snippet below is still the
+fallback if the Velo runtime blocks direct DOM access.
+
 Fixes:
 
 - iOS Safari `100vh` URL-bar overlap on hero sections
