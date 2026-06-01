@@ -33,7 +33,8 @@ Copy-ready Wix code lives at `../wix/`:
 
 ```
 wix/
-├── custom-code-body-end.html  ← Wix admin Custom Code snippet
+├── custom-code-body-end.js    ← JavaScript-only Wix admin hotfix
+├── custom-code-body-end.html  ← Wix admin Custom Code wrapper
 ├── masterPage.js              ← site-wide CSS/mobile CTA hotfix for Wix Velo
 └── README.md                  ← install steps and fallback notes
 ```

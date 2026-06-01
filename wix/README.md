@@ -2,9 +2,22 @@
 
 This folder contains code intended to be copied into the Wix platform.
 
+## `custom-code-body-end.js`
+
+Use `custom-code-body-end.js` when you need JavaScript-only hotfix code.
+
+Install options:
+
+1. For Wix admin **Custom Code**, wrap the file contents in `<script>...</script>` if Wix requires HTML tags.
+2. Set **Add Code to Pages** to **All pages**.
+3. Set **Place Code in** to **Body - end**.
+4. Enable **Load code on each new page** if Wix shows that option.
+5. Choose **Mobile only** if Wix shows a device option; otherwise leave it on all devices.
+6. Preview desktop and mobile, then Publish.
+
 ## `custom-code-body-end.html`
 
-Use `custom-code-body-end.html` for the Wix admin area.
+Use `custom-code-body-end.html` when the Wix admin Custom Code area accepts a complete HTML snippet. It contains the same hotfix as `<style>` plus `<script>` tags.
 
 Install steps:
 
@@ -30,7 +43,7 @@ Install steps:
 5. Preview desktop and mobile.
 6. Publish after confirming the CTA and mobile CSS fixes behave correctly.
 
-What both hotfixes do:
+What the hotfixes do:
 
 - Inject scoped CSS for the mobile viewport, tap targets, horizontal-scroll prevention, and iOS safe-area padding.
 - Add a mobile sticky **Call / Directions / Order** CTA.
@@ -38,4 +51,4 @@ What both hotfixes do:
 
 Important limitation:
 
-Some Wix/Velo environments restrict direct `document` access in frontend page code. If the browser console logs the warning from `masterPage.js`, use the admin Custom Code snippet in `wix/custom-code-body-end.html` instead.
+Some Wix/Velo environments restrict direct `document` access in frontend page code. If the browser console logs the warning from `masterPage.js`, use the admin Custom Code snippet instead.
