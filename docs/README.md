@@ -11,6 +11,7 @@ This folder contains all client-facing and internal docs for the Philly Steak & 
 | 03 | [Wix mobile hotfix](03-wix-mobile-hotfix.md) | Wix editor | Copy-paste Custom Code snippet for iPhone 11 + cross-browser |
 | 04 | [GBP checklist](04-gbp-checklist.md) | Client / Owner | Google Business Profile audit + weekly cadence |
 | 05 | [Proposal](05-proposal.md) | Client | Three-tier engagement scope + pricing |
+| 06 | [Live CSS/HTML update walkthrough](06-live-css-html-update-walkthrough.md) | Internal / Deployment | Compare local files with production and choose a live update path |
 
 ## Local working copy
 
